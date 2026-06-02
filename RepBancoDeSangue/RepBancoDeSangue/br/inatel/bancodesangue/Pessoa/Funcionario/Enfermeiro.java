@@ -9,8 +9,8 @@ import java.time.LocalDate;
 public class Enfermeiro extends Funcionario{
     protected String corem;
 
-    public Enfermeiro(String cargo, String matricula, String turno, int qtdatendimentos, String corem) {
-        super(nome,idade, cpf,cargo, matricula, turno, qtdatendimentos);
+    public Enfermeiro(String nome, int idade, String cpf, String sexo, String cargo, String matricula, String corem) {
+        super(nome, idade, cpf, sexo, cargo, matricula);
         this.corem = corem;
     }
 

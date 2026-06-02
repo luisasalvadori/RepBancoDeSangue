@@ -26,7 +26,7 @@ public class BolsaSangue {
         this.datavalidade = datavalidade;
     }
     public boolean verificarValidade(LocalDate data) { //data do uso da bolsa
-        return data.isBefore(datavalidade); //true = dentro da validade; false = vencida
+        return !data.isAfter(datavalidade); //true = dentro da validade; false = vencida, a bolsa está válida se a data de uso não for depois da data de validade.
     }
     public String getTipoS(){
         return tipoS;

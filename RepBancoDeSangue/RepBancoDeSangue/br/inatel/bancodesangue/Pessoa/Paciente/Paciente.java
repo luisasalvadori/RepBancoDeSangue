@@ -53,4 +53,12 @@ public class Paciente extends Pessoa {
         System.out.println("Quantidade de bolsas necessárias: " + this.quantSangue); // esta certo?
         System.out.println("Qauntidade de bolsas recebidas: " + this.bolsasRecebidas);
     }
+
+    public String getTipoS() {
+        return tipoS;
+    }
+
+    public void setTipoS(String tipoS) {
+        this.tipoS = tipoS;
+    }
 }

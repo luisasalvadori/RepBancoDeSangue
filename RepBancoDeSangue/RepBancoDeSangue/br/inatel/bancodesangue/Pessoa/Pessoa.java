@@ -21,4 +21,8 @@ public abstract class Pessoa {
     };
 
     public abstract boolean validarDados();
+
+    public String getNome() {
+        return nome;
+    }
 }
