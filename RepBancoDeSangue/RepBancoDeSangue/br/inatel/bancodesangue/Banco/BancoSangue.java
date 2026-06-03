@@ -24,7 +24,11 @@ public class BancoSangue {
             throw new BolsaNaoEncontradaException("A bolsa não existe no estoque");
     }
     public void listarTipo(String tipo){
-        //TERMINAR DE PENSAR ESSA PARTE
+        for (BolsaSangue bolsa : estoque){
+            if (bolsa.getTipoS().equalsIgnoreCase(tipo)){
+                System.out.println(bolsa.getTipoS()+" "+ bolsa.getDataColeta()+" "+bolsa.getDataValidade());
+            }
+        }
     }
     public String getNome() {
         return nome;
