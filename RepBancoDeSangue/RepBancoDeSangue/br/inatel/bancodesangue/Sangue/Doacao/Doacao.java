@@ -3,7 +3,7 @@ package br.inatel.bancodesangue.Sangue.Doacao;
 import br.inatel.bancodesangue.Pessoa.Doador.Doador;
 import br.inatel.bancodesangue.Pessoa.Funcionario.Enfermeiro;
 import br.inatel.bancodesangue.Sangue.BolsaSangue;
-
+import br.inatel.bancodesangue.Util.DataUtil;
 import java.time.LocalDate;
 
 public class Doacao {
@@ -24,17 +24,9 @@ public class Doacao {
     }
 
     public void registrarDoacao(){
-        System.out.println("Doacao registrada em: " + datacoleta);
+        System.out.println("Doacao registrada em: " + DataUtil.formatar(dataColeta));
 
     }
 
-    @Override
-    public String toString() {
-        return "Doacao{" +
-                "datacoleta=" + datacoleta +
-                ", doador=" + doador +
-                ", enfermeiro=" + enfermeiro +
-                ", bolsa=" + bolsa +
-                '}';
-    }
+    
 }
