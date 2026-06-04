@@ -13,10 +13,6 @@ public class Funcionario extends Pessoa {
         this.matricula = matricula;
     }
 
-    public void emitiralerta(String mensagem){
-        System.out.println("Alerta emitido pelo funcionario " + getNome() + ": " + mensagem);
-    }
-
     @Override
     public boolean validarDados() {
         if(cargo == null || cargo.isEmpty()){
