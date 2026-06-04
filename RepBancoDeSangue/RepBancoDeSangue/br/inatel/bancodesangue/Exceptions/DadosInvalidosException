@@ -1,7 +1,0 @@
-package br.inatel.bancodesangue.Exceptions;
-
-public class DadosInvalidosException extends Exception {
-    public DadosInvalidosException(String mensagem) {
-        super(mensagem);
-    }
-}
