@@ -14,15 +14,21 @@ public abstract class Pessoa {
     }
 
     public void mostrarDados(){
-        System.out.println("Nome: " + this.nome);
-        System.out.println("Idade: " + this.idade);
-        System.out.println("CPF: " + this.cpf);
-        System.out.println("Sexo: " + this.sexo);
+        System.out.println("Nome: " + nome);
+        System.out.println("Idade: " + idade);
+        System.out.println("CPF: " + cpf);
+        System.out.println("Sexo: " + sexo);
     };
 
     public abstract boolean validarDados();
 
     public String getNome() {
         return nome;
+    }
+    public int getIdade(){
+        return idade;
+    }
+    public String getSexo(){
+        return sexo;
     }
 }
