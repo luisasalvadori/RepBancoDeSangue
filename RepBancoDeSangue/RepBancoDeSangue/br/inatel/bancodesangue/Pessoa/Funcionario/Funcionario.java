@@ -13,9 +13,8 @@ public class Funcionario extends Pessoa {
         this.matricula = matricula;
     }
 
-    public void emitiralerta(){
-        // exibindo uma mensagem para quando for necessário emitir um alerta
-        System.out.println("Alerta emitido pelo funcionario " + nome);
+    public void emitiralerta(String mensagem){
+        System.out.println("Alerta emitido pelo funcionario " + getNome() + ": " + mensagem);
     }
 
     @Override
@@ -32,11 +31,19 @@ public class Funcionario extends Pessoa {
 
     @Override
     public void mostrardados(){
-        System.out.println("Informações do funcionário: ");
+        System.out.println("== Informações do funcionário ==");
 
         super.mostrarDados();
 
-        System.out.println("Cargo: " + this.cargo);
-        System.out.println("Matrícula: " + this.matricula);
+        System.out.println("Cargo: " + cargo);
+        System.out.println("Matrícula: " + matricula);
+    }
+
+    public String getCargo(){
+        return cargo;
+    }
+    public String getMatricula(){
+        return matricula;
     }
 }
+    
