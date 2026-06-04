@@ -8,12 +8,12 @@ import br.inatel.bancodesangue.Util.ValidadorDados;
 import java.time.LocalDate;
 
 public class Doador extends Pessoa {
-    protected String tipoS;
-    protected double peso;
-    protected boolean aptoDoacao;
-    protected LocalDate ultimaDoacao;
-    protected LocalDate proximaDoacao;
-    protected int bolsasDoadas;
+    private String tipoS;
+    private double peso;
+    private boolean aptoDoacao;
+    private LocalDate ultimaDoacao;
+    private LocalDate proximaDoacao;
+    private int bolsasDoadas;
 
     public Doador(String nome, int idade, String cpf, String sexo, String tipoS, double peso, boolean aptoDoacao, LocalDate ultimaDoacao, LocalDate proximaDoacao, int bolsasDoacao) {
         super(nome, idade, cpf, sexo);
