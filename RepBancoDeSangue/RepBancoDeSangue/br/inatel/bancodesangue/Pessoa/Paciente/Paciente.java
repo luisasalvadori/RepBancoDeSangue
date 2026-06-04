@@ -1,20 +1,22 @@
 package br.inatel.bancodesangue.Pessoa.Paciente;
 
+import br.inatel.bancodesangue.Exceptions.TipoSanguineoException;
 import br.inatel.bancodesangue.Pessoa.Pessoa;
 import br.inatel.bancodesangue.Sangue.Solicitacao.SolicitacaoSangue;
-
+import br.inatel.bancodesangue.Util.ValidadorDados;
 import java.time.LocalDate;
 
 public class Paciente extends Pessoa {
-    protected String tipoS;
-    protected int nivelUrgencia;
-    protected double quantSangue;
-    protected int bolsasRecebidas;
-    protected String diagnostico;
+    private String tipoS;
+    private int nivelUrgencia;
+    private double quantSangue;
+    private int bolsasRecebidas;
+    private String diagnostico;
 
     public Paciente(String nome, int idade, String cpf, String sexo, String tipoS, int nivelUrgencia, double quantSangue, int bolsasRecebidas, String diagnostico) {
         super(nome, idade, cpf, sexo);
-        this.tipoS = tipoS;
+        ValidadorDados.validarTipoSanguineo(tipoS);
+        this.tipoS = tipoS.trim().toUpperCase();
         this.nivelUrgencia = nivelUrgencia;
         this.quantSangue = quantSangue;
         this.bolsasRecebidas = bolsasRecebidas;
@@ -38,27 +40,28 @@ public class Paciente extends Pessoa {
         //1-alta prioridade, 2-média prioridade, 3-baixa prioridade
     }
 
+    public void receberBolsa(){
+        bolsasRecebidas++;
+    }
+    
     @Override
     public boolean validarDados() {
-
+        return getIdade()>0 && tipoS!=null && !tipoS.isBlanck() && nivelUrgencia>=0 && nivelUrgencia<=10 && quantSangue>0;
     }
 
     @Override
     public void mostrarDados(){
-        System.out.println("Informações do paciente:");
+        System.out.println("===== PACIENTE =====");
         super.mostrarDados();
-        System.out.println("Tipo sanguíneo: " + this.tipoS);
-        System.out.println("Diagnóstico: " + this.diagnostico);
-        System.out.println("Nível de urgência: " + this.nivelUrgencia);
-        System.out.println("Quantidade de bolsas necessárias: " + this.quantSangue); // esta certo?
-        System.out.println("Qauntidade de bolsas recebidas: " + this.bolsasRecebidas);
+        System.out.println("Tipo sanguíneo: " + tipoS);
+        System.out.println("Diagnóstico: " + diagnostico);
+        System.out.println("Nível de urgência: " + nivelUrgencia);
+        System.out.println("Prioridade: " + calcularPrioridade());
+        System.out.println("Bolsas necessárias: " + quantSangue);
+        System.out.println("Bolsas recebidas: " + bolsasRecebidas);
     }
 
     public String getTipoS() {
         return tipoS;
-    }
-
-    public void setTipoS(String tipoS) {
-        this.tipoS = tipoS;
     }
 }
