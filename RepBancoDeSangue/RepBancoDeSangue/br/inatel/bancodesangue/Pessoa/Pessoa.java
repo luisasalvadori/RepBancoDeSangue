@@ -1,10 +1,10 @@
 package br.inatel.bancodesangue.Pessoa;
 
 public abstract class Pessoa {
-    protected String nome;
-    protected int idade;
-    protected String cpf;
-    protected String sexo;
+    private String nome;
+    private int idade;
+    private String cpf;
+    private String sexo;
 
     public Pessoa(String nome, int idade, String cpf, String sexo) {
         this.nome = nome;
