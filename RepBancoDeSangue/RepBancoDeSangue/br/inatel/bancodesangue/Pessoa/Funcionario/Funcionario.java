@@ -3,8 +3,8 @@ package br.inatel.bancodesangue.Pessoa.Funcionario;
 import br.inatel.bancodesangue.Pessoa.Pessoa;
 
 public class Funcionario extends Pessoa {
-    protected String cargo;
-    protected String matricula;
+    private String cargo;
+    private String matricula;
 
     public Funcionario(String nome, int idade, String cpf, String sexo, String cargo, String matricula) {
         super(nome, idade, cpf, sexo);
