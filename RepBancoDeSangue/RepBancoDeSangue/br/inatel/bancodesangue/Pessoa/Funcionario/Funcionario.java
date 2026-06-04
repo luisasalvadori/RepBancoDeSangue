@@ -2,11 +2,11 @@ package br.inatel.bancodesangue.Pessoa.Funcionario;
 
 import br.inatel.bancodesangue.Pessoa.Pessoa;
 
-public class Funcionario extends Pessoa {
+public class Funcionario extends Pessoa{
     private String cargo;
     private String matricula;
 
-    public Funcionario(String nome, int idade, String cpf, String sexo, String cargo, String matricula) {
+    public Funcionario(String nome, int idade, String cpf, String sexo, String cargo, String matricula){
         super(nome, idade, cpf, sexo);
 
         this.cargo = cargo;
@@ -14,7 +14,7 @@ public class Funcionario extends Pessoa {
     }
 
     @Override
-    public boolean validarDados() {
+    public boolean validarDados(){
         if(cargo == null || cargo.isEmpty()){
             return false;
         }
