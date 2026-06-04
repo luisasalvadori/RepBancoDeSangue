@@ -11,12 +11,6 @@ public class Administrador extends Funcionario {
         System.out.println("Relatório geral gerado pelo administrador " + getNome());
         banco.listarEstoque();
     }
-
-    public boolean verificarEstoque(BancoSangue banco) {
-        boolean temEstoque = banco.getTotalBolsas > 0;
-        System.out.println("Estoque possui" +  banco.getTotalBolsas() + " bolsa(s).");
-        return temEstoque;
-    }
     
     @Override
     public void mostrardados() {
