@@ -394,3 +394,10 @@ public void mostrarArquivo() throws IOException {
 }
 ```
 Assim, o estoque é armazenado de forma persistente em um arquivo texto e pode ser exibido posteriormente ao usuário, mesmo após o encerramento da execução do programa."
+
+---
+
+**Conclusâo:**
+Conclui-se que a utilização da Inteligência Artificial foi de grande relevância para o desenvolvimento do projeto, pois forneceu sugestões, esclarecimentos conceituais e orientações relacionadas à modelagem e à implementação do sistema. Seu uso contribuiu para a organização das classes, para a compreensão dos conceitos de Programação Orientada a Objetos e para a análise de possíveis soluções durante o desenvolvimento.
+Entretanto, todas as sugestões recebidas foram avaliadas pela equipe de acordo com os requisitos do projeto e os conhecimentos adquiridos ao longo da disciplina. Por esse motivo, algumas recomendações não foram adotadas, uma vez que não atendiam integralmente às necessidades do sistema ou não estavam alinhadas às decisões definidas pelo grupo.
+Dessa forma, a Inteligência Artificial atuou como uma ferramenta de apoio ao processo de desenvolvimento, auxiliando na pesquisa e na resolução de dúvidas, sem substituir a análise crítica, a autonomia e a capacidade de decisão dos integrantes da equipe.
