@@ -147,3 +147,48 @@ SolicitacaoSangue implementa Compativel.
 Biomedico utiliza o resultado da compatibilidade para tomar a decisão de liberar ou não a bolsa.
 
 Essa abordagem evita duplicação de responsabilidades e segue melhor o princípio da responsabilidade única (Single Responsibility Principle), tornando o projeto mais organizado e fácil de manter."
+
+**Prompt 5**
+
+<ins>Pergunta:</ins>  
+"Para atribuição dos tipos de sangue, utilizamos String. Para não ter nenhum tipo de erro, como posso fazer a verificação de letras maíusculas ou algum tipo de sangue não existente?"
+
+<ins>Resposta:</ins>
+"Como vocês já decidiram utilizar String, o ideal é criar uma validação para garantir que apenas tipos sanguíneos válidos sejam aceitos.
+
+Uma abordagem simples seria utilizar o método toUpperCase() para converter qualquer entrada para letras maiúsculas e, em seguida, verificar se ela pertence ao conjunto de tipos permitidos.
+
+Exemplo:
+```java
+@Override
+public boolean validarDados() {
+
+    tipoS = tipoS.toUpperCase();
+
+    if (!(tipoS.equals("A+") ||
+          tipoS.equals("A-") ||
+          tipoS.equals("B+") ||
+          tipoS.equals("B-") ||
+          tipoS.equals("AB+") ||
+          tipoS.equals("AB-") ||
+          tipoS.equals("O+") ||
+          tipoS.equals("O-"))) {
+
+        return false;
+    }
+
+    return true;
+}
+```
+Dessa forma:
+```java
+a+  → A+
+ab+ → AB+
+o-  → O-
+```
+serão aceitos corretamente.
+Outra possibilidade interessante para o projeto seria lançar uma exceção personalizada:
+
+if (!validarTipoSanguineo()) {
+    throw new IllegalArgumentException("Tipo sanguíneo inválido.");
+}
