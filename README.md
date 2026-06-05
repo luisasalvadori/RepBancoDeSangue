@@ -69,3 +69,37 @@ br.inatel.bancodesangue
 └── principal
     └── Main
 ```
+Essa divisão permite que o projeto fique mais organizado e facilita a manutenção do código. O pacote pessoas reúne as classes relacionadas aos indivíduos atendidos pelo sistema. O pacote funcionarios concentra os profissionais responsáveis pelas operações do banco de sangue. O pacote sangue agrupa as classes diretamente ligadas às doações, bolsas, solicitações e controle de estoque. Já os pacotes interfaces, arquivos e excecoes separam recursos auxiliares importantes para a aplicação, como contratos de comportamento, persistência de dados e tratamento de erros."
+
+**Prompt 3**
+
+<ins>Pergunta:</ins>  
+"Quais seriam as relações de dependência ideal entre as classes?"
+
+<ins>Resposta:</ins>
+"As relações de dependência ideais seriam:
+Doador, Paciente e Funcionario possuem herança com Pessoa. Já Administrador, Biomedico e Enfermeiro possuem herança com Funcionario.
+```java
+Doador 1 -------- 0..* Doacao
+Enfermeiro 1 ---- 0..* Doacao
+Doacao 1 -------- 1 BolsaSangue
+```
+Uma doação pertence a um doador, é registrada por um enfermeiro e gera uma bolsa de sangue.
+```java
+BancoSangue 1 -------- 0..* BolsaSangue
+Administrador -------- BancoSangue
+```
+O banco de sangue armazena várias bolsas, e o administrador gerencia o estoque.
+```java
+Paciente 1 -------- 0..* SolicitacaoSangue
+SolicitacaoSangue -------- BolsaSangue
+SolicitacaoSangue - - -▷ Compativel
+```
+O paciente realiza solicitações de sangue. A solicitação usa uma bolsa para verificar compatibilidade e implementa a interface Compativel.
+```java
+Biomedico -------- BolsaSangue
+Biomedico -------- SolicitacaoSangue
+```
+O biomédico analisa a solicitação e libera ou rejeita a bolsa.
+Essa estrutura mantém o sistema organizado e coerente com as responsabilidades de cada classe."
+
