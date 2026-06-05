@@ -22,7 +22,7 @@ public abstract class Pessoa {
         System.out.println("Idade: " + idade);
         System.out.println("CPF: " + cpf);
         System.out.println("Sexo: " + sexo);
-    };
+    }
 
     //método abstrato que valida os dados da pessoa (é implementado nas subclasses)
     public abstract boolean validarDados();
