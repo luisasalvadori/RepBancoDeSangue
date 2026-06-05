@@ -49,8 +49,5 @@ public class BolsaSangue {
     public static String[] getTiposValidos() { return ValidadorDados.getTipoSanguineosValidos(); }
     public int getIdBolsa() { return idBolsa; }
     public String getTipoS() { return tipoS; }
-    public LocalDate getDataColeta() { return dataColeta; }
-    public LocalDate getDataValidade() { return dataValidade; }
-    public boolean isLiberada() { return liberada; } 
 }
     
