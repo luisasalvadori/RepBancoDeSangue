@@ -39,12 +39,14 @@ public class BancoSangue {
                 encontrou = true;
             }
         }
-        if (!encontrou) System.out.println("Nenhuma bolsa encontrada para o tipo " + tipo + ".");
+        if (!encontrou) { //se percorreu a lista e não encontrou o tipo especificado, 'encontrou' continua false e precisa ser invertido
+            System.out.println("Nenhuma bolsa encontrada para o tipo " + tipo + ".");}
     }
     public int contarPorTipo(String tipo) {
         int quantidade = 0;
         for (BolsaSangue bolsa : estoque) {
-            if (bolsa.getTipoS().equalsIgnoreCase(tipo)) quantidade++;
+            if (bolsa.getTipoS().equalsIgnoreCase(tipo)){
+                quantidade++;}
         }
         return quantidade;
     }
@@ -61,10 +63,9 @@ public class BancoSangue {
         System.out.println("===== ESTOQUE DO BANCO " + nome + " =====");
         if (estoque.isEmpty()) {
             System.out.println("Estoque vazio.");
-            return;
-        }
-        for (BolsaSangue bolsa : estoque){
-            bolsa.mostrarDados();}
+        } else{
+            for (BolsaSangue bolsa : estoque){
+                bolsa.mostrarDados();}}
     }
 
     public String getNome() { 
