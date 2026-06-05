@@ -1,0 +1,5 @@
+id;tipo;dataColeta;dataValidade;liberada
+1;O+;02-06-2026;07-07-2026;false
+2;A+;26-05-2026;30-06-2026;false
+4;AB+;05-06-2026;10-07-2026;false
+5;O-;05-06-2026;10-07-2026;false
