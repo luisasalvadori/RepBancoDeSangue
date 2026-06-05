@@ -353,3 +353,44 @@ public abstract class Pessoa {
 ```
 Essa abordagem segue o princípio do encapsulamento, que é uma das principais boas práticas da POO.
 No entanto, muitos professores permitem o uso de protected em projetos acadêmicos quando há várias classes filhas acessando frequentemente os atributos da superclasse."
+
+**Prompt 11**
+
+<ins>Pergunta:</ins>  
+"Vou utilizar arquivos para guardar o estoque do Banco de Sangue. Como eu posso salvar esse arquivo e ainda mostrá-lo?"
+
+<ins>Resposta:</ins>
+"Você pode salvar o estoque em um arquivo por meio de uma classe responsável pela manipulação dos arquivos, como a classe Arquivos.
+
+Nessa classe, o método salvarEstoque() recebe um objeto BancoSangue, percorre o ArrayList de bolsas presente no estoque e grava cada bolsa no arquivo:
+```java
+public void salvarEstoque(BancoSangue banco) throws IOException {
+    try (BufferedWriter writer = Files.newBufferedWriter(caminho)) {
+        writer.write("id;tipo;dataColeta;dataValidade;liberada");
+        writer.newLine();
+
+        for (BolsaSangue bolsa : banco.getEstoque()) {
+            writer.write(bolsa.toString());
+            writer.newLine();
+        }
+    }
+
+    System.out.println("Estoque salvo em " + caminho.toAbsolutePath());
+}
+```
+Para exibir o conteúdo salvo, pode ser utilizado o método mostrarArquivo(), que verifica se o arquivo existe e, em seguida, lê todas as linhas com Files.readAllLines():
+```java
+public void mostrarArquivo() throws IOException {
+    if (!Files.exists(caminho)) {
+        System.out.println("Arquivo ainda não existe. Salve o estoque primeiro.");
+        return;
+    }
+
+    System.out.println("===== CONTEÚDO DO ARQUIVO =====");
+
+    for (String linha : Files.readAllLines(caminho)) {
+        System.out.println(linha);
+    }
+}
+```
+Assim, o estoque é armazenado de forma persistente em um arquivo texto e pode ser exibido posteriormente ao usuário, mesmo após o encerramento da execução do programa."
