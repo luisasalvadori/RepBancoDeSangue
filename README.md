@@ -223,3 +223,133 @@ Além disso, essa solução:
 - evita que alguém crie um banco de sangue sem estoque;
 - mantém o encapsulamento da classe;
 - simplifica o uso da classe."
+
+**Prompt 7**
+
+<ins>Pergunta:</ins>  
+"Queremos utilizar a Thread para realizar um atendimento simultâneo. Como realizar isso?"
+
+<ins>Resposta:</ins>
+"Para simular atendimento simultâneo, vocês podem criar uma classe que herda de Thread. Cada objeto dessa classe representa um atendimento acontecendo ao mesmo tempo.
+
+Exemplo:
+```java
+public class AtendimentoThread extends Thread {
+
+    private String nomePaciente;
+    private String nomeFuncionario;
+
+    public AtendimentoThread(String nomePaciente, String nomeFuncionario) {
+        this.nomePaciente = nomePaciente;
+        this.nomeFuncionario = nomeFuncionario;
+    }
+
+    @Override
+    public void run() {
+        System.out.println("Atendimento iniciado: " + nomePaciente +
+                " por " + nomeFuncionario);
+
+        try {
+            Thread.sleep(3000); // simula tempo de atendimento
+        } catch (InterruptedException e) {
+            System.out.println("Atendimento interrompido.");
+        }
+
+        System.out.println("Atendimento finalizado: " + nomePaciente);
+    }
+}
+```
+
+**Prompt 8**
+
+<ins>Pergunta:</ins>  
+"Quando passamos um parâmetro do tipo Date, recebemos a data no formato AAAA-MM-DD. Como passar para DD-MM-AAAA?"
+
+<ins>Resposta:</ins>
+"Se vocês estão utilizando LocalDate, o formato padrão exibido pelo Java é: AAAA-MM-DD.
+Para exibir no formato DD-MM-AAAA, vocês devem utilizar um DateTimeFormatter.
+
+Exemplo:
+```java
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+LocalDate data = LocalDate.now();
+
+DateTimeFormatter formatter =
+        DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+String dataFormatada = data.format(formatter);
+
+System.out.println(dataFormatada);
+```
+
+**Prompt 9**
+
+<ins>Pergunta:</ins>  
+"Ao fazer a classe Menu, teria alguma maneira de facilitar a leitura dos dados digitados?"
+
+<ins>Resposta:</ins>
+"Sim. Uma forma simples e organizada é criar métodos auxiliares no próprio Menu para ler cada tipo de dado.
+
+Exemplo:
+```java
+private Scanner entrada = new Scanner(System.in);
+
+private String lerTexto(String mensagem) {
+    System.out.print(mensagem);
+    return entrada.nextLine();
+}
+
+private int lerInteiro(String mensagem) {
+    System.out.print(mensagem);
+    int valor = entrada.nextInt();
+    entrada.nextLine(); // limpa o enter
+    return valor;
+}
+
+private double lerDouble(String mensagem) {
+    System.out.print(mensagem);
+    double valor = entrada.nextDouble();
+    entrada.nextLine(); // limpa o enter
+    return valor;
+}
+```
+Assim, ao cadastrar um paciente, por exemplo, o código fica mais limpo:
+```java
+String nome = lerTexto("Nome: ");
+int idade = lerInteiro("Idade: ");
+String cpf = lerTexto("CPF: ");
+String tipoS = lerTexto("Tipo sanguíneo: ");
+double quantSangue = lerDouble("Quantidade de sangue: ");
+```
+Também é possível criar um método específico para datas usando a classe DataUtil:
+```java
+private LocalDate lerData(String mensagem) {
+    String texto = lerTexto(mensagem);
+    return DataUtil.converter(texto);
+}
+```
+Dessa forma, o Menu fica mais organizado, evita repetição de código e facilita a manutenção do sistema."
+
+**Prompt 10**
+
+<ins>Pergunta:</ins>  
+"Nas heranças, eu preciso utilizar os atributos como private ou protected? O que seria o ideal?"
+
+<ins>Resposta:</ins>
+"Para um projeto de Programação Orientada a Objetos, o mais recomendado é utilizar private e acessar os atributos por meio de getters e setters.
+
+Exemplo:
+```java
+public abstract class Pessoa {
+
+    private String nome;
+    private int idade;
+    private String cpf;
+
+    // getters e setters
+}
+```
+Essa abordagem segue o princípio do encapsulamento, que é uma das principais boas práticas da POO.
+No entanto, muitos professores permitem o uso de protected em projetos acadêmicos quando há várias classes filhas acessando frequentemente os atributos da superclasse."
