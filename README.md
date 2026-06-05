@@ -188,7 +188,38 @@ o-  → O-
 ```
 serão aceitos corretamente.
 Outra possibilidade interessante para o projeto seria lançar uma exceção personalizada:
-
+```java
 if (!validarTipoSanguineo()) {
     throw new IllegalArgumentException("Tipo sanguíneo inválido.");
 }
+```
+Como vocês já estão utilizando tratamento de exceções, essa solução demonstra um uso mais completo dos conceitos de POO e validação de dados."
+
+**Prompt 6**
+
+<ins>Pergunta:</ins>  
+"Estou utilizando ArrayList na classe Banco de Sangue. O mais correto seria utilizá-la como um parâmetro no construtor da classe ou colocar o new ArrayList dentro do construtor?"
+
+<ins>Resposta:</ins>
+"Para o contexto do projeto de vocês, o mais recomendado é instanciar o ArrayList dentro do construtor da classe BancoSangue, e não recebê-lo como parâmetro.
+
+Por exemplo:
+```java
+public class BancoSangue {
+
+    private String nome;
+    private ArrayList<BolsaSangue> estoque;
+
+    public BancoSangue(String nome) {
+        this.nome = nome;
+        this.estoque = new ArrayList<>();
+    }
+}
+```
+Essa abordagem é mais adequada porque o estoque faz parte da estrutura interna do banco de sangue. Quando um objeto BancoSangue é criado, é esperado que ele já possua um estoque inicial vazio, pronto para receber bolsas.
+
+Além disso, essa solução:
+- reduz a quantidade de parâmetros do construtor;
+- evita que alguém crie um banco de sangue sem estoque;
+- mantém o encapsulamento da classe;
+- simplifica o uso da classe."
