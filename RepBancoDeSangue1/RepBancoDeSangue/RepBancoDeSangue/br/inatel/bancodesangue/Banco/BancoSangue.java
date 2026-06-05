@@ -68,8 +68,6 @@ public class BancoSangue {
                 bolsa.mostrarDados();}}
     }
 
-    public String getNome() { 
-        return nome; }
     public List<BolsaSangue> getEstoque() { 
         return estoque; }
     public int getTotalBolsas() {
