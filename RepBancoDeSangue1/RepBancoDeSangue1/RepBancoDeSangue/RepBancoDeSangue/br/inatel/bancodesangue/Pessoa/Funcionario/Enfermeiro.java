@@ -8,11 +8,11 @@ import br.inatel.bancodesangue.Exceptions.DadosInvalidosException;
 import java.time.LocalDate;
 
 public class Enfermeiro extends Funcionario{
-    private String corem;
+    private String coren;
 
-    public Enfermeiro(String nome, int idade, String cpf, String sexo, String cargo, String matricula, String corem) {
+    public Enfermeiro(String nome, int idade, String cpf, String sexo, String cargo, String matricula, String coren) {
         super(nome, idade, cpf, sexo, cargo, matricula);
-        this.corem = corem;
+        this.coren = coren;
     }
 
     public Doador cadastrarDoador(String nome, int idade,String cpf,String sexo, String tipoS, double peso, LocalDate ultimaDoacao){
@@ -61,13 +61,13 @@ public class Enfermeiro extends Funcionario{
     }
 
         @Override
-        public boolean validarDados() { return super.validarDados() && corem != null && !corem.isBlank(); }
+        public boolean validarDados() { return super.validarDados() && coren != null && !coren.isBlank(); }
 
         @Override
         public void mostrarDados() {
             System.out.print("===== ENFERMEIRO =====\n");
             super.mostrarDados();
-            System.out.println("COREN: " + corem);
+            System.out.println("COREN: " + coren);
         }
     }
 
