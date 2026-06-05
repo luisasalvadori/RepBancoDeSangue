@@ -8,7 +8,7 @@ import br.inatel.bancodesangue.Util.ValidadorDados;
 import java.time.LocalDate;
 
 public class BolsaSangue {
-    private static int proximoId = 1;
+    private static int proximoId = 1; //todas as bolsas compartilham o mesmo contador
 
     private int idBolsa;
     private String tipoS;
@@ -27,17 +27,22 @@ public class BolsaSangue {
     }
 
     public boolean verificarValidade(LocalDate dataUso) {
-        return !dataUso.isAfter(dataValidade);
+        return !dataUso.isAfter(dataValidade); 
     }
 
-    public void liberar() { this.liberada = true; }
+    public void liberar() { 
+        this.liberada = true; }
 
     public void mostrarDados() {
-        System.out.println("ID: " + idBolsa + " | Tipo: " + tipoS + " | Coleta: " + DataUtil.formatar(dataColeta) + " | Validade: " + DataUtil.formatar(dataValidade) + " | Liberada: " + (liberada ? "sim" : "não"));
+        System.out.print("ID: " + idBolsa + " | Tipo: " + tipoS + " | Coleta: " + DataUtil.formatar(dataColeta) + " | Validade: " + DataUtil.formatar(dataValidade) + " | Liberada: " );
+        if (liberada) {
+            System.out.println("Sim");
+        }else {
+            System.out.println("Não");}
     }
 
     @Override
-    public String toString() {
+    public String toString() { //converte o objeto para String para facilitar a exibição
         return idBolsa + ";" + tipoS + ";" + DataUtil.formatar(dataColeta) + ";" + DataUtil.formatar(dataValidade) + ";" + liberada;
     }
 
@@ -46,6 +51,6 @@ public class BolsaSangue {
     public String getTipoS() { return tipoS; }
     public LocalDate getDataColeta() { return dataColeta; }
     public LocalDate getDataValidade() { return dataValidade; }
-    public boolean isLiberada() { return liberada; }
+    public boolean isLiberada() { return liberada; } 
 }
     
