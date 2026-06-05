@@ -103,3 +103,47 @@ Biomedico -------- SolicitacaoSangue
 O biomédico analisa a solicitação e libera ou rejeita a bolsa.
 Essa estrutura mantém o sistema organizado e coerente com as responsabilidades de cada classe."
 
+**Prompt 4**
+
+<ins>Pergunta:</ins>  
+"A classe SolicitaçaoSangue implementa a interface Compativel para chamar o método verificarCompatibilidade. Seria correto que a classe Biomédico também a implementasse?"
+
+<ins>Resposta:</ins>
+"Não necessariamente.
+
+Do ponto de vista da modelagem orientada a objetos, a interface Compativel deve ser implementada pelas classes que realmente possuem a responsabilidade de verificar a compatibilidade sanguínea.
+
+Se a interface foi definida como:
+```java
+public interface Compativel {
+    boolean verificarCompatibilidade(BolsaSangue bolsa);
+}
+```
+e a classe SolicitacaoSangue é responsável por comparar os dados do paciente com os dados da bolsa, então faz sentido que apenas ela implemente a interface.
+```java
+SolicitacaoSangue - - -▷ Compativel
+```
+Nesse cenário, o fluxo seria:
+```java
+Paciente realiza uma solicitação
+↓
+SolicitacaoSangue verifica a compatibilidade
+↓
+Biomedico analisa o resultado
+↓
+Biomedico libera ou rejeita a bolsa
+```
+Por outro lado, seria justificável que o Biomedico implementasse a interface apenas se ele também fosse responsável por executar sua própria verificação de compatibilidade.
+
+Por exemplo:
+```java
+public class Biomedico extends Funcionario implements Compativel
+```
+Nesse caso, o método poderia representar uma segunda análise realizada pelo profissional antes da liberação da bolsa.
+
+Entretanto, considerando a divisão atual de responsabilidades do projeto, a alternativa mais coerente é:
+
+SolicitacaoSangue implementa Compativel.
+Biomedico utiliza o resultado da compatibilidade para tomar a decisão de liberar ou não a bolsa.
+
+Essa abordagem evita duplicação de responsabilidades e segue melhor o princípio da responsabilidade única (Single Responsibility Principle), tornando o projeto mais organizado e fácil de manter."
