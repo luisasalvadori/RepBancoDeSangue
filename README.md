@@ -26,3 +26,46 @@ Controla doadores, receptores, compatibilidade e fila de espera para transplante
 Gerencia prescrições, estoque, validade e horários de medicação dos pacientes.
 8. Sistema de Agendamento de Exames
 Controla agendamento de exames laboratoriais e de imagem, evitando conflitos de horário e equipamentos."
+
+ **Prompt 2**
+
+<ins>Pergunta:</ins>
+"O trabalho que faremos será um o gerenciamento de banco de sangue. Selecionamos as seguintes classes: pessoa, doador, paciente, funcionário, administrador, biomédico, enfermeiro, doação, banco sangue, solicitação sangue, bolsa sangue, algumas exceptions, uma classe para administrar os arquivos e uma interface para identificar a compatibilidade. Pode separá-las em pacotes para ficar melhor organizadas?"
+
+<ins>Resposta:</ins>
+"Sim. Uma organização adequada seria separar as classes conforme suas responsabilidades dentro do sistema:
+```java
+br.inatel.bancodesangue
+
+├── pessoas
+│   ├── Pessoa
+│   ├── Doador
+│   └── Paciente
+│
+├── funcionarios
+│   ├── Funcionario
+│   ├── Administrador
+│   ├── Biomedico
+│   └── Enfermeiro
+│
+├── sangue
+│   ├── BolsaSangue
+│   ├── BancoSangue
+│   ├── Doacao
+│   └── SolicitacaoSangue
+│
+├── interfaces
+│   └── Compativel
+│
+├── arquivos
+│   └── GerenciadorArquivo
+│
+├── excecoes
+│   ├── DoadorInaptoException
+│   ├── BolsaIndisponivelException
+│   ├── TipoSanguineoIncompativelException
+│   └── ArquivoException
+│
+└── principal
+    └── Main
+```
