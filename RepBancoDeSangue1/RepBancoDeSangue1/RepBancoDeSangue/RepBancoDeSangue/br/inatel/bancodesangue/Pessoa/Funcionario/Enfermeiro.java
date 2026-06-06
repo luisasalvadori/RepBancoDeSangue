@@ -18,7 +18,7 @@ public class Enfermeiro extends Funcionario{
     // metodo responsavel por cadastrar um novo doador
     public Doador cadastrarDoador(String nome, int idade,String cpf,String sexo, String tipoS, double peso, LocalDate ultimaDoacao){
         int numeroDoacoes;
-        // Se nao houver data da ultima doacao
+        // se nao houver data da ultima doacao
         // considera que o doador nunca doou
         if(ultimaDoacao == null) {
             numeroDoacoes = 0;

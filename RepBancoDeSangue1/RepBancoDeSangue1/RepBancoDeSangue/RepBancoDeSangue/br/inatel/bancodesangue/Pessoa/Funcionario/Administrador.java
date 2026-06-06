@@ -20,7 +20,7 @@ public class Administrador extends Funcionario {
 
     // método responsável por verificar se existe alguma bolsa cadastrada no estoque
     public boolean verificarEstoque(BancoSangue banco) {
-        // Verifica se a quantidade total de bolsas no banco é maior que zero
+        // verifica se a quantidade total de bolsas no banco é maior que zero
         boolean temEstoque = banco.getTotalBolsas() > 0;
         
         // exibe a quantidade total de bolsas cadastradas no estoque
