@@ -395,6 +395,34 @@ public void mostrarArquivo() throws IOException {
 ```
 Assim, o estoque é armazenado de forma persistente em um arquivo texto e pode ser exibido posteriormente ao usuário, mesmo após o encerramento da execução do programa."
 
+**Prompt 12**
+
+<ins>Pergunta:</ins>  
+"Em arquivos, qual o melhor utilizar: IO ou NIO? E como utilizá-los da melhor forma?"
+
+<ins>Resposta:</ins>
+Para esse projeto, o mais adequado seria utilizar NIO como base principal, pois ela é mais moderna e facilita a manipulação de arquivos por meio das classes Path e Files.
+
+A melhor forma seria usar:
+```java
+Path caminho = Path.of("estoque.txt");
+```
+para representar o caminho do arquivo, e a classe Files para operações como verificar existência, criar leitor/escritor e ler o conteúdo:
+```java
+Files.exists(caminho);
+Files.newBufferedWriter(caminho);
+Files.readAllLines(caminho);
+```
+Mesmo usando NIO, ainda é adequado utilizar algumas classes da API IO, como BufferedWriter, pois ela permite escrever dados textuais no arquivo de forma eficiente:
+```java
+try (BufferedWriter writer = Files.newBufferedWriter(caminho)) {
+    writer.write("dados do estoque");
+}
+```
+Assim, a melhor abordagem seria:
+    Utilizar NIO para gerenciar o arquivo e seu caminho, por meio de Path e Files, e utilizar IO para realizar a escrita ou leitura eficiente dos dados, por meio de classes como BufferedWriter.
+Essa combinação torna o código mais organizado, moderno e adequado para salvar e exibir o estoque do banco de sangue em arquivos."
+
 ---
 
 **Conclusão:**
