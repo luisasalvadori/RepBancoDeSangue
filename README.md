@@ -1,17 +1,15 @@
 # Sistema de Gerenciamento de Banco de Sangue
 
-## Diagrama UML
+**Diagrama UML**
 <img width="2560" height="2126" alt="UML_RepBancoDeSangue" src="https://github.com/user-attachments/assets/61fe86de-5725-47b0-85df-f2e4de63f272" />
 
-## Estrutura de Pacotes
+**Estrutura de Pacotes**
 <img width="567" height="1600" alt="pacotes_RepBancoDeSangue" src="https://github.com/user-attachments/assets/867d2a57-8fe8-4a06-82e8-9c07c528d096" />
 
-
+---
 
 **Utilização de IA:**
 Foi utilizado o ChatGPT (GPT-5.3 OpenAI) para sanar algumas dúvidas
-
----
 
  **Prompt 1**
 
@@ -433,7 +431,6 @@ Assim, a melhor abordagem seria:
     Utilizar NIO para gerenciar o arquivo e seu caminho, por meio de Path e Files, e utilizar IO para realizar a escrita ou leitura eficiente dos dados, por meio de classes como BufferedWriter.
 Essa combinação torna o código mais organizado, moderno e adequado para salvar e exibir o estoque do banco de sangue em arquivos."
 
----
 
 **Conclusão:**
 
