@@ -1,3 +1,13 @@
+# Sistema de Gerenciamento de Banco de Sangue
+
+## Diagrama UML
+<img width="2560" height="2126" alt="UML_RepBancoDeSangue" src="https://github.com/user-attachments/assets/61fe86de-5725-47b0-85df-f2e4de63f272" />
+
+## Estrutura de Pacotes
+<img width="567" height="1600" alt="pacotes_RepBancoDeSangue" src="https://github.com/user-attachments/assets/867d2a57-8fe8-4a06-82e8-9c07c528d096" />
+
+
+
 **Utilização de IA:**
 Foi utilizado o ChatGPT (GPT-5.3 OpenAI) para sanar algumas dúvidas
 
