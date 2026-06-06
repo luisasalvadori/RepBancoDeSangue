@@ -9,8 +9,11 @@ import java.time.LocalDate;
 
 public class Doacao {
     private LocalDate datacoleta;
+    // doador responsavel pela doacao
     private Doador doador;
+    // enfermeiro que realizou a coleta
     private Enfermeiro enfermeiro;
+    // bolsa de sangue gerada durante a doacao
     private BolsaSangue bolsa;
 
     public Doacao(LocalDate datacoleta, Doador doador, Enfermeiro enfermeiro, BolsaSangue bolsa) {
@@ -19,12 +22,12 @@ public class Doacao {
         this.enfermeiro = enfermeiro;
         this.bolsa = bolsa;
     }
-
+    // retorna a bolsa de sangue associada à doacao
     public BolsaSangue gerarBolsa(){
         return bolsa;
     }
-
-    public void registrarDoacao(){
+    // registra a doacao exibindo a data da coleta
+    public void registrarDoacao(){// utiliza DataUtil para formatar a data antes de exibir
         System.out.println("Doacao registrada em: " + DataUtil.formatar(datacoleta));
 
     }
