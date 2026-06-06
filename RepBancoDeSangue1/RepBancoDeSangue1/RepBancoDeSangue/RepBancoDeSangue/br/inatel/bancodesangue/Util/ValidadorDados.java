@@ -9,8 +9,6 @@ import java.time.LocalDate;
 public class ValidadorDados {
     private static final String[] TIPO_SANGUINEOS_VALIDOS = {"O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"}; //vetor que contem os tipos de sangue aceitos pelo sistema
 
-    private ValidadorDados() {}
-
     //verifica se o tipo sanguineo informado é valido
     public static void validarTipoSanguineo(String tipoS) throws TipoSanguineoException {
         if (tipoS == null || tipoS.isBlank()){
