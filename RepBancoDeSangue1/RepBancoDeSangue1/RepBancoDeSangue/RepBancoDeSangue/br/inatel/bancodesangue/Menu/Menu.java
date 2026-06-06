@@ -24,9 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-// Classe responsavel pela interação com o usuario.
-// Controla menus, cadastros, estoque, doacoes,
-// solicitacoes e geracao de relatorios.
+// classe responsavel pela interação com o usuario, controla menus, cadastros, estoque, doacoes, solicitacoes e geracao de relatorios
 public class Menu {
     private Scanner scanner;
     private BancoSangue banco;
@@ -195,10 +193,9 @@ public class Menu {
     }
 
     private void cadastrarDoador() {
-
         System.out.println("===== CADASTRO DE DOADOR =====");
         String nome = lerTexto("Nome: ");
-        // enquanto a idade for negativa, solicita novamente
+        // verificando a idade, enquanto for negativa, solicita novamente
         int idade;
         do {
             idade = lerInteiro("Idade: ");
@@ -207,7 +204,7 @@ public class Menu {
                 System.out.println("ERRO: idade não pode ser negativa.");
             }
         } while (idade < 0);
-        // Deve conter exatamente 11 digitos numericos
+        // o cpf deve conter exatamente 11 digitos, sendo todos eles números 
         String cpf;
         do {
             cpf = lerTexto("CPF: ");
@@ -222,7 +219,7 @@ public class Menu {
         double peso;
         do {
             peso = lerDouble("Peso: ");
-            // o doador deve possuir no minimo 30 kg para fazer o cadastro
+            // o doador deve possuir no minimo 30 kg para fazer o cadastro com sucesso
             if (peso<30)
             {
                 System.out.println("ERRO: peso não pode ser menor que 30kg.");
@@ -230,7 +227,7 @@ public class Menu {
         }while(peso<30);
 
         LocalDate ultimaDoacao = lerDataOpcionalNaoFutura("Última doação (DD-MM-AAAA ou vazio se nunca doou): ");
-        // verifica se existe enfermeiro cadastrado
+        // verifica se existe enfermeiro algum cadastrado
         if(enfermeiros.isEmpty()){
             System.out.println("Cadastre pelo menos um enfermeiro primeiro");
             return;
@@ -241,17 +238,20 @@ public class Menu {
         if(enfermeiro == null){
             return;
         }
-        // O enfermeiro realiza o cadastro do doador
+        // o enfermeiro realiza o cadastro do doador
         Doador doador = enfermeiro.cadastrarDoador(nome,idade,cpf,sexo,tipoS,peso,ultimaDoacao);
-        // Se o cadastro foi realizado com sucesso,
-        // adiciona o doador a lista do sistema
+        // se o cadastro foi realizado com sucesso, adiciona o doador a lista do sistema
         if (doador != null) {
             doadores.add(doador);
         }
     }
+
+        // método responsável por cadastrar um novo paciente 
         private void cadastrarPaciente() {
             System.out.println("===== CADASTRO DE PACIENTE =====");
             String nome = lerTexto("Nome: ");
+
+            // valida a idade para impedir valores negativos
             int idade;
             do {
                 idade = lerInteiro("Idade: ");
@@ -260,6 +260,8 @@ public class Menu {
                     System.out.println("ERRO: idade não pode ser negativa.");
                 }
             } while (idade < 0);
+
+            // valida o peso, no caso usando o parametro que não pode ser menor que 0kg
             double peso;
             do {
                 peso = lerDouble("Peso: ");
@@ -276,14 +278,18 @@ public class Menu {
             String diagnostico = lerTexto("Diagnóstico: ");
 
             try {
+                // cria o paciente com os dados informados
                 Paciente paciente = new Paciente(nome, idade, cpf, sexo, tipoS, nivelUrgencia, quantSangue, 0, diagnostico);
+                // adiciona o paciente à lista do sistema
                 pacientes.add(paciente);
                 System.out.println("Paciente cadastrado com sucesso.");
             } catch (TipoSanguineoException e) {
+                // caso o tipo sanguíneo seja inválido, o erro é tratado aqui
                 System.out.println("Erro no cadastro do paciente: " + e.getMessage());
             }
         }
 
+    // método responsável por cadastrar um administrador
     private void cadastrarAdministrador() {
         System.out.println("===== CADASTRO DE ADMINISTRADOR =====");
         String nome = lerTexto("Nome: ");
@@ -291,10 +297,12 @@ public class Menu {
         String cpf = lerTexto("CPF: ");
         String sexo = lerTexto("Sexo: ");
         String matricula = lerTexto("Matrícula: ");
+        // cargo é definido automaticamente como "Administrador".
         administradores.add(new Administrador(nome, idade, cpf, sexo, "Administrador", matricula));
         System.out.println("Administrador cadastrado com sucesso.");
     }
 
+    // método responsável por cadastrar um biomédico
     private void cadastrarBiomedico() {
         System.out.println("===== CADASTRO DE BIOMÉDICO =====");
         String nome = lerTexto("Nome: ");
@@ -303,10 +311,12 @@ public class Menu {
         String sexo = lerTexto("Sexo: ");
         String matricula = lerTexto("Matrícula: ");
         String crbio = lerTexto("CRBio: ");
+        // cargo é definido automaticamente como "Biomédico"
         biomedicos.add(new Biomedico(nome, idade, cpf, sexo, "Biomédico", matricula, crbio));
         System.out.println("Biomédico cadastrado com sucesso.");
     }
-
+    
+    // método responsável por cadastrar um enfermeiro
     private void cadastrarEnfermeiro() {
         System.out.println("===== CADASTRO DE ENFERMEIRO =====");
         String nome = lerTexto("Nome: ");
@@ -315,52 +325,69 @@ public class Menu {
         String sexo = lerTexto("Sexo: ");
         String matricula = lerTexto("Matrícula: ");
         String coren = lerTexto("COREN: ");
+        // cargo é definido automaticamente como "Enfermeiro"
         enfermeiros.add(new Enfermeiro(nome, idade, cpf, sexo, "Enfermeiro", matricula, coren));
         System.out.println("Enfermeiro cadastrado com sucesso.");
     }
 
+    // método responsável por adicionar uma bolsa diretamente pelo menu
     private void adicionarBolsaPeloMenu() {
         try {
             String tipo = lerTexto("Tipo sanguíneo da bolsa: ");
+             // lê a data da coleta e impede datas futuras
             LocalDate dataColeta = lerDataObrigatoriaNaoFutura("Data da coleta (DD-MM-AAAA): ");
+            // cria a bolsa e adiciona ao estoque do banco
             banco.adicionarBolsa(new BolsaSangue(tipo, dataColeta));
         } catch (TipoSanguineoException | DadosInvalidosException e) {
+             // trata tipo sanguíneo inválido ou data inválida
             System.out.println("Erro: " + e.getMessage());
         }
     }
 
+    // lista as bolsas de um tipo sanguíneo específico
     private void listarPorTipo() {
         String tipo = lerTexto("Tipo sanguíneo para busca: ");
         banco.listarTipo(tipo);
     }
 
+    // registra uma doação feita por um doador
     private void registrarDoacao() {
+        // não é possível registrar doação sem doadores cadastrados
         if (doadores.isEmpty()) {
             System.out.println("Cadastre pelo menos um doador primeiro.");
             return;
         }
+        // não é possível registrar doação sem enfermeiros cadastrados
         if (enfermeiros.isEmpty()) {
             System.out.println("Cadastre pelo menos um enfermeiro primeiro.");
             return;
         }
 
+        // escolhe o doador e o enfermeiro responsáveis pela doação
         Doador doador = escolherDoador();
         Enfermeiro enfermeiro = escolherEnfermeiro();
+        // se alguma escolha for inválida, cancela a operação
         if (doador == null || enfermeiro == null) return;
 
         try {
+            // lê a data da coleta da doação
             LocalDate dataColeta = lerDataObrigatoriaNaoFutura("Data da coleta (DD-MM-AAAA): ");
+            // cria uma bolsa com o mesmo tipo sanguíneo do doador
             BolsaSangue bolsa = new BolsaSangue(doador.getTipoS(), dataColeta);
+            // enfermeiro realiza a coleta
             Doacao doacao = enfermeiro.coletarSangue(doador, bolsa, dataColeta);
+            // se a doação foi realizada, registra e adiciona a bolsa ao estoque
             if (doacao != null) {
                 doacao.registrarDoacao();
                 banco.adicionarBolsa(doacao.gerarBolsa());
             }
         } catch (TipoSanguineoException | DadosInvalidosException e) {
+            // trata erros de tipo sanguíneo ou dados inválidos
             System.out.println("Erro: " + e.getMessage());
         }
     }
 
+    // cria uma nova solicitação de sangue para um paciente escolhido
     private void criarSolicitacao() {
         if (pacientes.isEmpty()) {
             System.out.println("Cadastre pelo menos um paciente primeiro.");
@@ -368,10 +395,13 @@ public class Menu {
         }
         Paciente paciente = escolherPaciente();
         if (paciente == null) return;
+        // cria uma solicitação usando o método da própria classe Paciente
         solicitacaoAtual = paciente.solicitarSangue();
+        // mostra os dados da solicitação recém-criada
         solicitacaoAtual.mostrarDados();
     }
 
+    // exibe os dados da solicitação atual
     private void mostrarSolicitacaoAtual() {
         if (solicitacaoAtual == null) {
             System.out.println("Nenhuma solicitação criada.");
@@ -379,7 +409,8 @@ public class Menu {
         }
         solicitacaoAtual.mostrarDados();
     }
-
+    
+    // libera uma bolsa para a solicitação atual, a liberação depende da análise do biomédico
     private void liberarBolsa() {
         if (solicitacaoAtual == null) {
             System.out.println("Crie uma solicitação antes de liberar uma bolsa.");
@@ -391,21 +422,27 @@ public class Menu {
         }
 
         try {
+            // escolhe o biomédico responsável pela análise
             Biomedico biomedico = escolherBiomedico();
             if (biomedico == null) return;
+            // busca a bolsa pelo ID informado
             int id = lerInteiro("Informe o ID da bolsa: ");
             BolsaSangue bolsa = banco.buscarPorId(id);
+            // define no biomédico qual solicitação e qual bolsa serão analisadas
             biomedico.setSolicitacao(solicitacaoAtual);
             biomedico.setBolsaEmAnalise(bolsa);
+            // se a bolsa for liberada, o paciente recebe a bolsa e ela é removida do estoque
             if (biomedico.liberarBolsa()) {
                 solicitacaoAtual.getPaciente().receberBolsa();
                 banco.removerBolsa(bolsa);
             }
         } catch (BolsaNaoEncontradaException e) {
+            // caso o ID informado não corresponda a nenhuma bolsa
             System.out.println("Erro: " + e.getMessage());
         }
     }
 
+    // simula um atendimento usando Thread, ela executa a análise/liberação de uma bolsa em uma linha de execução separada
     private void simularThread() {
         if (solicitacaoAtual == null || biomedicos.isEmpty()) {
             System.out.println("É necessário ter uma solicitação atual e um biomédico cadastrado.");
@@ -416,17 +453,22 @@ public class Menu {
             if (biomedico == null) return;
             int id = lerInteiro("Informe o ID da bolsa para a thread: ");
             BolsaSangue bolsa = banco.buscarPorId(id);
+            // cria a thread de atendimento
             AtendimentoThread atendimento = new AtendimentoThread("Thread-Atendimento-1", biomedico, solicitacaoAtual, bolsa);
+            // inicia a execução da thread
             atendimento.start();
+            // faz a thread principal esperar a thread de atendimento terminar
             atendimento.join();
         } catch (BolsaNaoEncontradaException e) {
             System.out.println("Erro: " + e.getMessage());
         } catch (InterruptedException e) {
+            // caso a thread seja interrompida, restaura o estado de interrupção
             Thread.currentThread().interrupt();
             System.out.println("Thread interrompida.");
         }
     }
-
+    
+    // salva o estoque atual em um arquivo
     private void salvarEstoque() {
         try {
             arquivo.salvarEstoque(banco);
@@ -435,6 +477,7 @@ public class Menu {
         }
     }
 
+    // lê e mostra o conteúdo do arquivo de estoque
     private void lerArquivo() {
         try {
             arquivo.mostrarArquivo();
@@ -443,6 +486,7 @@ public class Menu {
         }
     }
 
+    // gera um relatório geral usando um administrador
     private void gerarRelatorioGeral() {
         if (administradores.isEmpty()) {
             System.out.println("Cadastre pelo menos um administrador primeiro.");
@@ -452,6 +496,7 @@ public class Menu {
         if (administrador != null) administrador.gerarRelatorioGeral(banco);
     }
 
+    // lista todos os doadores cadastrados
     private void listarDoadores() {
         System.out.println("===== DOADORES CADASTRADOS =====");
         if (doadores.isEmpty()) {
@@ -464,6 +509,7 @@ public class Menu {
         }
     }
 
+    // lista todos os pacientes cadastrados
     private void listarPacientes() {
         System.out.println("===== PACIENTES CADASTRADOS =====");
         if (pacientes.isEmpty()) {
@@ -476,6 +522,7 @@ public class Menu {
         }
     }
 
+    // lista todos os funcionários, separados por tipo
     private void listarFuncionarios() {
         System.out.println("===== FUNCIONÁRIOS CADASTRADOS =====");
         listarListaFuncionarios("Administradores", administradores);
@@ -483,6 +530,7 @@ public class Menu {
         listarListaFuncionarios("Enfermeiros", enfermeiros);
     }
 
+    // método genérico para listar qualquer lista de funcionários, o uso de "? extends Funcionario" permite passar listas de Administrador, Biomedico ou Enfermeiro, pois todos herdam de Funcionario
     private void listarListaFuncionarios(String titulo, List<? extends Funcionario> funcionarios) {
         System.out.println("\n--- " + titulo + " ---");
         if (funcionarios.isEmpty()) {
@@ -495,6 +543,7 @@ public class Menu {
         }
     }
 
+    // mostra os doadores cadastrados e permite escolher um deles
     private Doador escolherDoador() {
         listarNomesDoadores();
         int posicao = lerInteiro("Escolha o doador: ") - 1;
@@ -505,6 +554,7 @@ public class Menu {
         return doadores.get(posicao);
     }
 
+    // mostra os pacientes cadastrados e permite escolher um deles
     private Paciente escolherPaciente() {
         listarNomesPacientes();
         int posicao = lerInteiro("Escolha o paciente: ") - 1;
@@ -515,6 +565,7 @@ public class Menu {
         return pacientes.get(posicao);
     }
 
+    // mostra os administradores cadastrados e permite escolher um deles
     private Administrador escolherAdministrador() {
         listarNomesFuncionarios(administradores);
         int posicao = lerInteiro("Escolha o administrador: ") - 1;
@@ -525,6 +576,7 @@ public class Menu {
         return administradores.get(posicao);
     }
 
+    // mostra os biomédicos cadastrados e permite escolher um deles
     private Biomedico escolherBiomedico() {
         listarNomesFuncionarios(biomedicos);
         int posicao = lerInteiro("Escolha o biomédico: ") - 1;
@@ -535,6 +587,7 @@ public class Menu {
         return biomedicos.get(posicao);
     }
 
+    // mostra os enfermeiros cadastrados e permite escolher um deles
     private Enfermeiro escolherEnfermeiro() {
         listarNomesFuncionarios(enfermeiros);
         int posicao = lerInteiro("Escolha o enfermeiro: ") - 1;
@@ -545,6 +598,7 @@ public class Menu {
         return enfermeiros.get(posicao);
     }
 
+    // lista apenas os nomes dos doadores para facilitar a escolha
     private void listarNomesDoadores() {
         System.out.println("===== ESCOLHA UM DOADOR =====");
         for (int i = 0; i < doadores.size(); i++) {
@@ -552,6 +606,7 @@ public class Menu {
         }
     }
 
+    // lista apenas os nomes dos pacientes para facilitar a escolha
     private void listarNomesPacientes() {
         System.out.println("===== ESCOLHA UM PACIENTE =====");
         for (int i = 0; i < pacientes.size(); i++) {
@@ -559,18 +614,20 @@ public class Menu {
         }
     }
 
+    // lista apenas nome e matrícula dos funcionários para facilitar a escolha
     private void listarNomesFuncionarios(List<? extends Funcionario> funcionarios) {
         System.out.println("===== ESCOLHA UM FUNCIONÁRIO =====");
         for (int i = 0; i < funcionarios.size(); i++) {
             System.out.println((i + 1) + " - " + funcionarios.get(i).getNome() + " | Matrícula: " + funcionarios.get(i).getMatricula());
         }
     }
-    // Le um texto digitado pelo usuario
+    // le um texto digitado pelo usuario
     private String lerTexto(String mensagem) {
         System.out.print(mensagem);
         return scanner.nextLine();
     }
 
+    // lê um número inteiro, enquanto o usuário digitar algo inválido, o método continua pedindo
     private int lerInteiro(String mensagem) {
         while (true) {
             try {
@@ -581,7 +638,7 @@ public class Menu {
             }
         }
     }
-
+    // lê um número decimal, o replace permite aceitar tanto vírgula quanto ponto
     private double lerDouble(String mensagem) {
         while (true) {
             try {
@@ -593,6 +650,7 @@ public class Menu {
         }
     }
 
+    // lê uma data obrigatória no formato DD-MM-AAAA, se o formato estiver errado, pede novamente
     private LocalDate lerDataObrigatoria(String mensagem) {
         while (true) {
             try {
@@ -603,7 +661,8 @@ public class Menu {
             }
         }
     }
-
+    
+    // lê uma data obrigatória e impede que ela seja futura
     private LocalDate lerDataObrigatoriaNaoFutura(String mensagem) {
         while (true) {
             LocalDate data = lerDataObrigatoria(mensagem);
@@ -616,6 +675,7 @@ public class Menu {
         }
     }
 
+    // lê uma data opcional, se o usuário deixar em branco, retorna null
     private LocalDate lerDataOpcional(String mensagem) {
         while (true) {
             try {
@@ -629,6 +689,7 @@ public class Menu {
         }
     }
 
+    // lê uma data opcional e impede que ela seja futura
     private LocalDate lerDataOpcionalNaoFutura(String mensagem) {
         while (true) {
             LocalDate data = lerDataOpcional(mensagem);
