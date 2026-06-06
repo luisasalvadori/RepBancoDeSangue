@@ -3,7 +3,6 @@ package br.inatel.bancodesangue.Arquivos;
 import br.inatel.bancodesangue.Banco.BancoSangue;
 import br.inatel.bancodesangue.Sangue.BolsaSangue;
 
-import javax.sound.midi.Patch;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
