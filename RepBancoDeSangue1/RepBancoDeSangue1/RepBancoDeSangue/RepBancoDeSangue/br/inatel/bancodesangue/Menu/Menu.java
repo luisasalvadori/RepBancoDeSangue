@@ -24,6 +24,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+// Classe responsavel pela interação com o usuario.
+// Controla menus, cadastros, estoque, doacoes,
+// solicitacoes e geracao de relatorios.
 public class Menu {
     private Scanner scanner;
     private BancoSangue banco;
@@ -195,6 +198,7 @@ public class Menu {
 
         System.out.println("===== CADASTRO DE DOADOR =====");
         String nome = lerTexto("Nome: ");
+        // enquanto a idade for negativa, solicita novamente
         int idade;
         do {
             idade = lerInteiro("Idade: ");
@@ -203,6 +207,7 @@ public class Menu {
                 System.out.println("ERRO: idade não pode ser negativa.");
             }
         } while (idade < 0);
+        // Deve conter exatamente 11 digitos numericos
         String cpf;
         do {
             cpf = lerTexto("CPF: ");
@@ -217,6 +222,7 @@ public class Menu {
         double peso;
         do {
             peso = lerDouble("Peso: ");
+            // o doador deve possuir no minimo 30 kg para fazer o cadastro
             if (peso<30)
             {
                 System.out.println("ERRO: peso não pode ser menor que 30kg.");
@@ -224,21 +230,21 @@ public class Menu {
         }while(peso<30);
 
         LocalDate ultimaDoacao = lerDataOpcionalNaoFutura("Última doação (DD-MM-AAAA ou vazio se nunca doou): ");
-
+        // verifica se existe enfermeiro cadastrado
         if(enfermeiros.isEmpty()){
             System.out.println("Cadastre pelo menos um enfermeiro primeiro");
             return;
         }
-
+        // seleciona o enfermeiro responsavel pelo cadastro
         Enfermeiro enfermeiro = escolherEnfermeiro();
 
         if(enfermeiro == null){
             return;
         }
-
-
+        // O enfermeiro realiza o cadastro do doador
         Doador doador = enfermeiro.cadastrarDoador(nome,idade,cpf,sexo,tipoS,peso,ultimaDoacao);
-
+        // Se o cadastro foi realizado com sucesso,
+        // adiciona o doador a lista do sistema
         if (doador != null) {
             doadores.add(doador);
         }
@@ -559,7 +565,7 @@ public class Menu {
             System.out.println((i + 1) + " - " + funcionarios.get(i).getNome() + " | Matrícula: " + funcionarios.get(i).getMatricula());
         }
     }
-
+    // Le um texto digitado pelo usuario
     private String lerTexto(String mensagem) {
         System.out.print(mensagem);
         return scanner.nextLine();
