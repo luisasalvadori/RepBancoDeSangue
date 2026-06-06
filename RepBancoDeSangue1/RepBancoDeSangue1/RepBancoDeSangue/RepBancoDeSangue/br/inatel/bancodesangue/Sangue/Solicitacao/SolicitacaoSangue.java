@@ -50,20 +50,5 @@ public class SolicitacaoSangue implements Compativel {
 
     public Paciente getPaciente() { return paciente; } // retorna o paciente armazenado
     
-    // TOSTRING - extra, nao sei se vamos usar ou nao (deixar aqui por enquanto)
-    /*
-     -> toString é chamado automaticamente quando tentamos imprimir o objeto.
-     -> Ex: System.out.println(solicitacao) vai chamar este método.
-     -> Retorna uma String legível com os dados principais do objeto.
-     -> O operador ternário "paciente != null ? ... : ..."
-     -> evita erro caso o paciente seja nulo.
-
-    @Override
-    public String toString() {
-        return "SolicitacaoSangue{" +
-                "paciente=" + (paciente != null ? paciente.getNome() : "null") +
-                ", dataSolicitacao=" + dataSolicitacao +
-                '}';
-    }
-    */
+   
 }
